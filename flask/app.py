@@ -19,7 +19,7 @@ def predict(features):
     X = dv.transform(features)
     preds = model.predict(X)
     print(preds)
-    return round(preds[0])
+    return "{:,}".format(round(preds[0]))
 
 
 # Ensure templates are auto-reloaded
@@ -46,9 +46,9 @@ def prediction():
             features = prepare_features(house)
             pred = predict(features)
             result = {'House price': pred}
-
             price = result['House price']
-            return render_template("index.html", prices=price)
+            sizes = house["squareMeters"]
+            return render_template("index.html", prices=price, sizes=sizes)
             #return redirect("/")
             
             #db.execute("INSERT INTO birthday (name, city, birthday, language) VALUES(?,?,?,?)", name, city, month, language)
