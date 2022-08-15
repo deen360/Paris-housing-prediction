@@ -12,12 +12,7 @@ from datetime import datetime
 from prefect import task, flow, get_run_logger
 import mlflow
 
-
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("my-experiment-1")
-
-
-mlflow.sklearn.autolog()
+ 
 
 @task
 def read_dataframe(path):
@@ -28,6 +23,7 @@ def read_dataframe(path):
 
 @task
 def preparing_features(df_train, df_val):
+    #with mlflow.start_run():
     logger = get_run_logger()
     categorical = ['squareMeters']
     df_train_data = df_train[categorical]
@@ -51,22 +47,30 @@ def preparing_features(df_train, df_val):
 
 @task
 def train_predict_model(dv, model, X_train, X_val, y_train, y_val):
-    #with mlflow.start_run():
-    logger = get_run_logger()
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_val)
-    mean_squared_error(y_val, y_pred, squared=False)
-    rmse = mean_squared_error(y_val, y_pred, squared=False)
-    mlflow.log_metric("rmse", rmse)
-    logger.info(f"The MSE of validation is: {rmse}")
+    with mlflow.start_run():
+        logger = get_run_logger()
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_val)
+        mean_squared_error(y_val, y_pred, squared=False)
+        rmse = mean_squared_error(y_val, y_pred, squared=False)
+        mlflow.log_metric("rmse", rmse)
+        logger.info(f"The MSE of validation is: {rmse}")
 
-    filename = './models/model-lin.b'
-    pickle.dump((dv, model), open(filename,'wb'))
-    mlflow.log_artifact(local_path=filename, artifact_path="prefect_trained_models")
-    logger.info(f"{filename} has been successfully logged")
+        filename = './models/model-lin.b'
+        pickle.dump((dv, model), open(filename,'wb'))
+        mlflow.log_artifact(local_path=filename, artifact_path="prefect_trained_models")
+        logger.info(f"{filename} has been successfully logged")
 
 @flow
+
 def main(train_path: str="./ParisHousing_period_01.parquet", val_path: str="./ParisHousing_period_02.parquet"):
+   
+    mlflow.sklearn.autolog()
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    #mlflow.set_tracking_uri("sqlite:///backend.db")
+    mlflow.set_experiment("my-experiment-1")
+
+
     
     logger = get_run_logger()
 
@@ -78,4 +82,3 @@ def main(train_path: str="./ParisHousing_period_01.parquet", val_path: str="./Pa
     model = LinearRegression()
     train_predict_model(dv, model, X_train, X_val, y_train, y_val)
     logger.info("training automation is successful")
-

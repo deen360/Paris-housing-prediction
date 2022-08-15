@@ -24,9 +24,9 @@
       <h1>Paris House prediction</h1>
     </div>
 
-    <form action="/" method="POST" class="box">
+    <form action="/predict" method="POST" class="box">
       <p>
-        <label for="item">Enter the square meters of the house you want</label>
+        <label for="item">Enter the square-meters of the house you want</label>
       </p>
 
       <p>
@@ -41,13 +41,15 @@
       </p>
 
       <p>
-        <button class="button" type="submit">Check predicted cost</button>
+        <button class="button" type="submit">Check predicted price</button>
       </p>
     </form>
 
     <div class="list">
       <ul>
-        {% if prices %} Estimated Price is {{ prices }} EUROS {% endif %}
+        {% if prices %} Estimated Price is
+        <br />
+        {{ prices }} Euros {% endif %}
       </ul>
     </div>
   </body>

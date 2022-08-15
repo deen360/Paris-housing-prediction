@@ -1,7 +1,7 @@
 
 
-docs on from prefect deployment
-https://docs.prefect.io/tutorials/deployments/
+docs on from prefect deployments
+https://docs.prefect.io/tutorials/deploymentss/
 
 #you will be needing 4 terminals in the same folder 
 
@@ -40,11 +40,11 @@ check that both servers are running
 steps to deploy the prefect flow are as follows
 
 
-prefect deployment build is the Prefect CLI command that enables you to prepare the settings for a deployment
-## prefect deployment build ./paris_flow.py:main -n paris-housing-deployment -t Parisjob
+prefect deployments build is the Prefect CLI command that enables you to prepare the settings for a deployments
+## prefect deployments build ./paris_flow_local.py:main -n paris-housing-deployments -t Parisjob
      
 # parameters: {'name':'Paris'}
-Open the paris_flow.py-deployment.yaml file and add the parameter 
+Open the paris_flow.py-deployments.yaml file and add the parameter 
 
 #  prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api
 Note the message to set PREFECT_API_URL so that you're coordinating flows with this API instance.
@@ -53,25 +53,25 @@ Open another terminal and run this command to set the API URL:
 # these file should be present in the folder 
 The flow code in paris_flow.py.py (mandatory)
 The manifest paris_flow.py-manifest.json (this is not mandatory)
-The deployment settings paris_flow.py-deployment.yaml (mandatory)
+The deployments settings paris_flow.py-deployments.yaml (mandatory)
 
 # prefect deployment apply main-deployment.yaml
-Now use the prefect deployment apply command to create the deployment on the Prefect Orion server, specifying the name of the main-deployment.yaml file.
+Now use the prefect deployments apply command to create the deployments on the Prefect Orion server, specifying the name of the main-deployments.yaml file.
 
-# prefect deployment ls
-To demonstrate that your deployment exists, list all of the current deployments:
+# prefect deployments ls
+To demonstrate that your deployments exists, list all of the current deploymentss:
 
-#  prefect deployment inspect main/paris-housing-deployment
-to display details for a specific deployment.
+#  prefect deployment inspect main/paris-housing-deployments
+to display details for a specific deployments.
 # ------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Work queues and agent<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 .
 # prefect agent start -t Parisjob
-run the prefect agent start command, passing a -t test option that creates a work queue for test tags. Remember, we configured this same tag on the deployment at an earlier step.
+run the prefect agent start command, passing a -t test option that creates a work queue for test tags. Remember, we configured this same tag on the deployments at an earlier step.
 
 
-Now that you've created the deployment, agent, and associated work queue, you can interact with it in multiple ways. For example, you can use the Prefect CLI to run a local flow run for the deployment
+Now that you've created the deployments, agent, and associated work queue, you can interact with it in multiple ways. For example, you can use the Prefect CLI to run a local flow run for the deployments
 
-# prefect deployment run main/paris-housing-deployment
+# prefect deployment run main/paris-housing-deployments
 
 
 the flow will activate and you will see it in the ui but the artifacts will not be logged
