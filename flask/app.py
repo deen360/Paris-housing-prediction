@@ -2,6 +2,17 @@
 
 from flask import Flask, jsonify, redirect, render_template, request, session
 import pickle
+import pymongo
+from pymongo import MongoClient
+
+
+cluster = MongoClient("mongodb+srv://deen360:1_Jackson5@cluster0.zyfi4dh.mongodb.net/?retryWrites=true&w=majority")
+
+#name of database
+db =cluster["flask"]
+
+#name of collection
+collection = db["parisprediction"]
 
 
 app = Flask(__name__)
@@ -48,6 +59,8 @@ def prediction():
             result = {'House price': pred}
             price = result['House price']
             sizes = house["squareMeters"]
+            data = {"squareMeters": size, 'House price': pred}
+            database = collection.insert_one(data)
             return render_template("index.html", prices=price, sizes=sizes)
             #return redirect("/")
             
