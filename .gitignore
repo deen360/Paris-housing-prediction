@@ -1,0 +1,7 @@
+01-dataset/terraform/.terraform
+01-dataset/terraform/.terraform.lock.hcl
+02-model_choosing/delete
+infrastructure/.terraform
+infrastructure/.terraform.lock.hcl
+infrastructure/.terraform/providers/
+model_choosing/backend.db
