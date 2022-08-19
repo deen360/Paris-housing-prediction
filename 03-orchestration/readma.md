@@ -70,3 +70,6 @@ you can then see the flow in the prefect ui and also the parameters in the mlflo
  paris.py as a python script using 
 # python paris.py
 this will show you almost the same log as the deployment log , note that the paris.py will log an artifact and an mlrun, the paris.py file is the same with paris_flow.py except that it has a main function called below, which make it initialize when run as a python script
+
+
+alert slack??

@@ -29,7 +29,7 @@ we can also chek the prometheus ui to see the data and run some promql queries
 # evidently:data_drift:p_value
 to run some promql queries we can input the above line in the search bar and we see the drift p values, we can also check the graph too in the prometheus ui, or search "up" to see the instances running, 0 means machine is down nd 1 means machine is up
 
-#alert ???
+#alert ??? slach
 
 
 #for the batch monitoring
