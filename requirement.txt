@@ -1,0 +1,18 @@
+name: project
+channels:
+  - defaults
+dependencies:
+  - pandas
+  - boto3
+  - pyarrow
+  - requests
+  - s3fs
+  - seaborn
+  - scikit-learn
+  - nb_conda_kernels
+  - pipenv
+  - gunicorn
+  - pymongo
+  - pytest
+  
+prefix: /home/deen/anaconda3/envs/project
