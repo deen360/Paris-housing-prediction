@@ -2,7 +2,7 @@ Problem statement:
 the global aim of this project is to develop an end to end machine learning operations, from sourcing of datatset, to experiment tracking, orchestration,deployment and monitoring of our models as well as following the best practices, the datatset chosen was based on the interest of helping people living in paris to be able to estimate the cost of house, inorder make better decisons, as houses are quite expensive in the area 
 
 
-final deploment available  on  ![paris-prediction](https://paris-housing-prediction.herokuapp.com/)
+final deploment available  on   [paris-prediction](https://paris-housing-prediction.herokuapp.com/)
 
 conda enviroment was used for this project:
 before we start the project, we create a conda environment installing all the dependencies 
@@ -22,7 +22,7 @@ NOTES:
 	a more detailed readme on each individual process has been included in each folder 
 
 
-DATASET ![kaggle dataset](https://www.kaggle.com/datasets/mssmartypants/paris-housing-price-prediction)
+DATASET  [kaggle dataset](https://www.kaggle.com/datasets/mssmartypants/paris-housing-price-prediction)
 we create an infrastructure for the terraform-state for the backend 
 we crate a bucket to store our dataset using terraform
 we execute a python script, that gets data from kaggle, sort the data by years, divides the data into 4 and uploades it into our s3 bucket
@@ -52,7 +52,7 @@ FLASK-DEPLOYMENT
  the test are done using pytest, and files can be found in the flask folder, in this deployment, we used mongodb clusters as database, so that 
  any input from any user online will go state to our database on the server.
  
- deployment is available ![paris-prediction](https://paris-housing-prediction.herokuapp.com/)
+ deployment is available  [paris-prediction](https://paris-housing-prediction.herokuapp.com/)
 
 
 

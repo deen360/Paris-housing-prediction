@@ -3,11 +3,11 @@ here we automate the workflow, and configure our script to use prefect cloud
 the training of the model is defined using functions and are declared as task, the entry point which is "main" function is where the data we want to use for training is entered.
 
 we can run our prefect locally or on the cloud.  to run prefect on the cloud authication is reuired,
-instructions on how to authenticate the keys can be found ![prefect auth](https://docs.prefect.io/ui/cloud-getting-started/)
+instructions on how to authenticate the keys can be found  [prefect auth](https://docs.prefect.io/ui/cloud-getting-started/)
 
 after we decide where to run prefect, (either locally or on cloud) using the dataset we want as training
 
-docs on from ![prefect deployments](https://docs.prefect.io/tutorials/deploymentss/) was used for this deployment
+docs on from  [prefect deployments](https://docs.prefect.io/tutorials/deploymentss/) was used for this deployment
 
 the following steps are used to deploy  prefect 
 
@@ -26,7 +26,7 @@ terminal -2 -> we lauch the orion server orion
 # prefect orion start
 which will make prefect avaialble on -> http://127.0.0.1:4200
 
-#if prefect doesn't start, update it to the lastest version ![prefect](https://pypi.org/project/prefect/)
+#if prefect doesn't start, update it to the lastest version  [prefect](https://pypi.org/project/prefect/)
 
 terminal-3 we run
 # prefect deployments build ./paris_flow.py:main -n paris-housing-deployments -t Parisjob

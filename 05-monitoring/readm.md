@@ -12,7 +12,7 @@ we run docker compose up to start the container, this build the docker container
 this starts all the files applications required, starting from evidently, mongodb, prometheus and grafana
 
 # python send_data.py
-with the command above we send data to the docker container running using "python send_data.py", . the [send_data.py](mlops-project/05-monitoring/send_data.py) sends the squaremters in the file ParisHousing_period_04.parquet to the to the container each second, and it receives a response of the predicted result, this result is will be automatically logged into our mongodb database, wghich is available on ![pymongo_database(online)](mlops-project/05-monitoring/pymongo_database(online).ipynb).
+with the command above we send data to the docker container running using "python send_data.py", . the [send_data.py](mlops-project/05-monitoring/send_data.py) sends the squaremters in the file ParisHousing_period_04.parquet to the to the container each second, and it receives a response of the predicted result, this result is will be automatically logged into our mongodb database, wghich is available on  [pymongo_database(online)](mlops-project/05-monitoring/pymongo_database(online).ipynb).
 
 # jupyter-notebook
 to see the data logged, we open the pymongo_database(online).ipynb file to see the data logging in our pymongo collection
