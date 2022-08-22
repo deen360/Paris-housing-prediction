@@ -73,5 +73,5 @@ the sheduling is done either from the main-deployment.yaml or from the deploymen
 this will show you almost the same log as the deployment log , note that the paris.py will log an artifact and an mlrun, the paris.py file is the same with paris_flow.py except that it has a main function called below, which make it initialize when run as a python script
 
 
-slack alerts available on, anytime the deployment is run, an alert is sent to the phone,        
+slack alerts available on, anytime the deployment is run, an alert is sent to the phone, (you can join the channel)        
 # #ml-deployment-mlops
