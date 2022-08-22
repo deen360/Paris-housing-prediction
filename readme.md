@@ -2,7 +2,7 @@ Problem statement:
 the global aim of this project is to develop an end to end machine learning operations, from sourcing of datatset, to experiment tracking, orchestration,deployment and monitoring of our models as well as following the best practices, the datatset chosen was based on the interest of helping people living in paris to be able to estimate the cost of house, inorder make better decisons, as houses are quite expensive in the area 
 
 
-final deploment available  on   [paris-prediction](https://paris-housing-prediction.herokuapp.com/)
+final deployment available  on   [paris-prediction](https://paris-housing-prediction.herokuapp.com/)
 
 conda enviroment was used for this project:
 before we start the project, we create a conda environment installing all the dependencies 

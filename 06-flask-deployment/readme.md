@@ -12,3 +12,5 @@ the testing of flask app was done using pytest
 
 for security reason, i wont be uploading my password together with the app file, as mongodb rquest your cluster password to be visible, however
 the cluster can be changed to your persoal cluster, if you open a free account with  [mongodb](https://account.mongodb.com/account/login)
+
+the actual file deployed from github [folder](https://github.com/deen360/paris-housing)
