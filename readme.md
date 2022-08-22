@@ -7,7 +7,8 @@ final deployment available  on   [paris-prediction](https://paris-housing-predic
 conda enviroment was used for this project:
 before we start the project, we create a conda environment installing all the dependencies 
 	from conda base
-		we run the follwing command: 
+	
+		#we run the follwing command: 
 			conda env create -f environment.yml  -> creates a conda environment with the enviroment.yml file
 			conda activate project -> this activate the projects environment created in the enviroment.yml file
 		    make setup -> the runs the setup in the make file, installing all the dependencies to our new environment
