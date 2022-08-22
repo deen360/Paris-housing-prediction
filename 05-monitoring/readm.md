@@ -1,5 +1,5 @@
 here we focus on the monitoring of our process, to see if we have a data drift
-the monitoring here will be done both in online and in batch model, using evidently, mongo db, primethus and grafana 
+the monitoring here will be done both in online and in batch model, using evidently, mongo db, primethus and grafana (some images are available in the image folder on 1st page)
 
 ->for the online monitoring
 first we run the command (in the terminal)
