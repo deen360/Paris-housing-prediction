@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/1/e19e85dc40fd45b087b7c9abc99aa166/artifacts
+end_time: 1661127720518
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: e19e85dc40fd45b087b7c9abc99aa166
+run_uuid: e19e85dc40fd45b087b7c9abc99aa166
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1661127716525
+status: 3
+tags: []
+user_id: deen

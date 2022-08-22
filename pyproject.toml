@@ -1,0 +1,38 @@
+[tool.pylint.messages_control]
+
+
+disable = [
+    "missing-function-docstring",
+    "missing-final-newline",
+    "missing-class-docstring",
+    "missing-module-docstring",
+    "invalid-name",
+    "too-few-public-methods",
+    "line-too-long",
+    "too-many-arguments",
+    "duplicate-code",
+    "redefined-outer-name",
+    "consider-using-with",
+    "redefined-outer-name",
+    "unused-import",
+    "unused-variable",
+    "consider-using-f-string",
+    "consider-using-enumerate",
+    "inconsistent-return-statements",
+    "no-else-return"
+]
+
+ignore-paths=["05-monitoring"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+skip-string-normalization = true
+
+
+[tool.isort]
+multi_line_output = 3
+length_sort = true
+
+
+

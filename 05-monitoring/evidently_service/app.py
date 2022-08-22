@@ -9,42 +9,39 @@ The service gets a reference dataset from reference.csv file and process current
 
 Metrics calculation results are available with `GET /metrics` HTTP method in Prometheus compatible format.
 """
-import hashlib
 import os
-
-import dataclasses
-import datetime
+import hashlib
 import logging
-from typing import Dict
-from typing import List
-from typing import Optional
+import datetime
+import dataclasses
+from typing import Dict, List, Optional
 
+import yaml
 import flask
 import pandas as pd
 import prometheus_client
-from pyarrow import parquet as pq
 from flask import Flask
-import yaml
+from pyarrow import parquet as pq
+from evidently.runner.loader import DataLoader, DataOptions
+from evidently.model_monitoring import (
+    ModelMonitoring,
+    DataDriftMonitor,
+    DataQualityMonitor,
+    CatTargetDriftMonitor,
+    NumTargetDriftMonitor,
+    RegressionPerformanceMonitor,
+    ClassificationPerformanceMonitor,
+    ProbClassificationPerformanceMonitor,
+)
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
-
 from evidently.pipeline.column_mapping import ColumnMapping
-from evidently.model_monitoring import ModelMonitoring
-from evidently.model_monitoring import CatTargetDriftMonitor
-from evidently.model_monitoring import ClassificationPerformanceMonitor
-from evidently.model_monitoring import DataDriftMonitor
-from evidently.model_monitoring import DataQualityMonitor
-from evidently.model_monitoring import NumTargetDriftMonitor
-from evidently.model_monitoring import ProbClassificationPerformanceMonitor
-from evidently.model_monitoring import RegressionPerformanceMonitor
-
-from evidently.runner.loader import DataLoader
-from evidently.runner.loader import DataOptions
-
 
 app = Flask(__name__)
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()]
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler()],
 )
 
 # Add prometheus wsgi middleware to route /metrics requests
@@ -94,11 +91,7 @@ class MonitoringService:
     calculation_period_sec: float = 15
     window_size: int
 
-    def __init__(
-        self,
-        datasets: Dict[str, LoadedDataset],
-        window_size: int
-    ):
+    def __init__(self, datasets: Dict[str, LoadedDataset], window_size: int):
         self.reference = {}
         self.monitoring = {}
         self.current = {}
@@ -108,7 +101,8 @@ class MonitoringService:
         for dataset_info in datasets.values():
             self.reference[dataset_info.name] = dataset_info.references
             self.monitoring[dataset_info.name] = ModelMonitoring(
-                monitors=[EVIDENTLY_MONITORS_MAPPING[k]() for k in dataset_info.monitors], options=[]
+                monitors=[EVIDENTLY_MONITORS_MAPPING[k]() for k in dataset_info.monitors],
+                options=[],
             )
             self.column_mapping[dataset_info.name] = dataset_info.column_mapping
 
@@ -135,7 +129,10 @@ class MonitoringService:
         self.current[dataset_name] = current_data
 
         if current_size < window_size:
-            logging.info(f"Not enough data for measurement: {current_size} of {window_size}." f" Waiting more data")
+            logging.info(
+                f"Not enough data for measurement: {current_size} of {window_size}."
+                f" Waiting more data"
+            )
             return
 
         next_run_time = self.next_run_time.get(dataset_name)
@@ -148,7 +145,9 @@ class MonitoringService:
             seconds=self.calculation_period_sec
         )
         self.monitoring[dataset_name].execute(
-            self.reference[dataset_name], current_data, self.column_mapping[dataset_name]
+            self.reference[dataset_name],
+            current_data,
+            self.column_mapping[dataset_name],
         )
 
         for metric, value, labels in self.monitoring[dataset_name].metrics():
@@ -187,7 +186,9 @@ def configure_service():
     # try to find a config file, it should be generated via the data preparation script
     if not os.path.exists(config_file_path):
         logging.error("File %s does not exist", config_file_path)
-        exit("Cannot find a config file for the metrics service. Try to check README.md for setup instructions.")
+        exit(
+            "Cannot find a config file for the metrics service. Try to check README.md for setup instructions."
+        )
 
     with open(config_file_path, "rb") as config_file:
         config = yaml.safe_load(config_file)
@@ -196,26 +197,29 @@ def configure_service():
     datasets = {}
 
     for dataset_name, dataset_options in config["datasets"].items():
-        reference_file = dataset_options['reference_file']
+        reference_file = dataset_options["reference_file"]
         logging.info(f"Load reference data for dataset {dataset_name} from {reference_file}")
-    #should be edited 
+        # should be edited
         reference_data = pq.read_table(reference_file).to_pandas()
-        #reference_data['duration'] = reference_data.lpep_dropoff_datetime - reference_data.lpep_pickup_datetime
-        reference_data['squareMeters'] = reference_data.squareMeters
-        #reference_data.duration = reference_data.duration.apply(lambda td: td.total_seconds() / 60)
-        #reference_data = reference_data[(reference_data.duration >= 1) & (reference_data.duration <= 60)]
+        # reference_data['duration'] = reference_data.lpep_dropoff_datetime - reference_data.lpep_pickup_datetime
+        reference_data["squareMeters"] = reference_data.squareMeters
+        # reference_data.duration = reference_data.duration.apply(lambda td: td.total_seconds() / 60)
+        # reference_data = reference_data[(reference_data.duration >= 1) & (reference_data.duration <= 60)]
         reference_data = reference_data[(reference_data.index >= 1)]
-        
+
         datasets[dataset_name] = LoadedDataset(
             name=dataset_name,
             references=reference_data,
-            monitors=dataset_options['monitors'],
-            column_mapping=ColumnMapping(**dataset_options["column_mapping"])
+            monitors=dataset_options["monitors"],
+            column_mapping=ColumnMapping(**dataset_options["column_mapping"]),
         )
-        logging.info("Reference is loaded for dataset %s: %s rows", dataset_name, len(reference_data))
+        logging.info(
+            "Reference is loaded for dataset %s: %s rows",
+            dataset_name,
+            len(reference_data),
+        )
 
     SERVICE = MonitoringService(datasets=datasets, window_size=options.window_size)
-
 
 
 @app.route("/iterate/<dataset>", methods=["POST"])

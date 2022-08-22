@@ -4,7 +4,7 @@ the monitoring here will be done both in online and in batch model, using eviden
 ->for the online monitoring
 first we run the command (in the terminal)
 # python prepare.py 
-which downloads 2 files from the s3 bucket -> ParisHousing_period_01.parquet which is used as the reference file and ParisHousing_period_04.parquet which is used as new data sent
+which downloads 2 files from the s3 bucket -> ParisHousing_period_01.parquet which is used as the reference file and ParisHousing_period_04.parquet which is used as new data sent (alradey done)
 
 # docker compose up  --build 
 we run docker compose up to start the container, this build the docker container 
@@ -17,19 +17,19 @@ with the command above we send data to the docker container running using "pytho
 # jupyter-notebook
 to see the data logged, we open the pymongo_database(online).ipynb file to see the data logging in our pymongo collection
 -
-->image
 # http://localhost:3000                 username: admin     password: admin
 while the data is sending, we open the grafana ui 
     go to dashboards
         go to "evidently data drift dashboard" and you will see the data drift there for the "squaremeters" and "category(luxury or basic)"
--->image
+
+############# grafana
+
 # http://localhost:9091/ 
 we can also chek the prometheus ui to see the data and run some promql queries 
 
 # evidently:data_drift:p_value
 to run some promql queries we can input the above line in the search bar and we see the drift p values, we can also check the graph too in the prometheus ui, or search "up" to see the instances running, 0 means machine is down nd 1 means machine is up
 
-#alert ??? slach
 
 
 #for the batch monitoring

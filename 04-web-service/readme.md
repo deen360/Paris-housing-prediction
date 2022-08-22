@@ -25,5 +25,4 @@ terminal-2
 # python test.py 
 we run the test.py in another terminal, when it returns a prediction, that means our container is working properly as a web-service 
 
-if we want to download the image asaa file, which is not necessary for this project, we can do 
-#sudo docker image load --input house-price-prediction-service:v1.tar
+we deploy the model to the web in 06-flask-deployment

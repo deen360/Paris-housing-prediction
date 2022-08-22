@@ -3,12 +3,21 @@
 ###
 name: paris-housing-deployments
 description: null
-version: 11fc45b8d65fc1e945f247846b34dffe
+version: d1c42201a2232552c9ce2d1ce700a1ef
+# The work queue that will handle this deployment's runs
+work_queue_name: {'name':'Paris'}
 tags:
 - Parisjob
-parameters: {'name':'Paris'}
+parameters:
+  name: Paris
 schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: main
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -19,11 +28,9 @@ infrastructure:
   - -m
   - prefect.engine
   stream_output: true
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: main
-manifest_path: null
+  _block_document_id: 4a440756-5eb3-4a69-8f68-7bb8865a1e1d
+  _block_document_name: anonymous-bb2b3c2a-453f-498b-b396-194d3b3a0a19
+  _is_anonymous: true
 storage: null
 path: /home/deen/Desktop/datatalks/mlops-project/03-orchestration
 entrypoint: paris_flow.py:main
