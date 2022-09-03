@@ -5,14 +5,13 @@ we use the terraform files in the terraform folder to create an s3 bucket where 
 
 Using the files in the terrafom folder, the following commands we used 
   
-terraform init -> which initializes the terrafom state
-terraform plan -> which shows the planned configuration
-terraform validate -> to ensure the configuration is valid
-terraform apply -> to apply the configuration
+terraform init -> which initializes the terrafom state\
+terraform plan -> which shows the planned configuration\
+terraform validate -> to ensure the configuration is valid\
+terraform apply -> to apply the configuration\
 
-################### terraform image 
 
-After the S3 bucket named (mlops-project-dataset-deen) was created with terraform
+After the S3 bucket named (mlops-project-dataset-deen) is created with terraform
 
 split_dataset was written in jupyter notebook and converted to a  [python script](mlops-project/dataset/python_script)
 
