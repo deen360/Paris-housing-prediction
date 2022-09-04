@@ -24,7 +24,7 @@ DATASET  [kaggle dataset](https://www.kaggle.com/datasets/mssmartypants/paris-ho
 an infrastructure for the terraform-state for the backend 
 a bucket to store our dataset is created using terraform
 a python script is executed, which gets data from kaggle, sorts the data by years, divides the data into 4 periods and uploades them into s3 bucket created
-![image in S3](https://user-images.githubusercontent.com/74934494/188283658-ae28388d-1555-456f-8c05-826811b7f73b.png)
+
 
 
 MODEL CHOOSING
