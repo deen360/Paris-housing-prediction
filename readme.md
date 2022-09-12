@@ -2,6 +2,7 @@ Problem statement:
 the global aim of this project is to develop an end to end machine learning operations, from sourcing of datatset, to experiment tracking, orchestration,deployment and monitoring of our models as well as following the best practices, the datatset chosen was based on the interest of helping people living in paris to be able to estimate the cost of house, in order make better decisons, as houses are quite expensive in the area 
 
 
+
 final deployment available  on   [paris-prediction](https://paris-housing-prediction.herokuapp.com/)
 
 conda enviroment was used for this project:
@@ -12,6 +13,11 @@ before we start the project, we create a conda environment installing all the de
 		conda env create -f environment.yml  -> creates a conda environment with the enviroment.yml file
 		conda activate project -> this activate the projects environment created in the enviroment.yml file
 		make setup -> the runs the setup in the make file, installing all the dependencies to our new environment
+
+
+![ARCHITECTURE USED](https://user-images.githubusercontent.com/74934494/189665087-8aeee35f-161d-43ad-af69-52a6929fab7d.png)
+
+
 
 
 NOTES:
